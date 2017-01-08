@@ -10,19 +10,28 @@ import {Customer} from "./customer.interface";
 export class AppComponent {
   public myForm: FormGroup;
 
+  public sides = [
+    {value: 'L', display: 'Light Side', color:"primary"},
+    {value: 'D', display: 'Dark Side', color:"danger"}
+  ];
+
   constructor(private _fb: FormBuilder) {
   }
 
   ngOnInit() {
     this.myForm = this._fb.group({
+      side: [this.sides[0].value],
       name: ['', [Validators.required, Validators.minLength(5)]],
+      master: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+      planet: [''],
+      mail: ['', Validators.required],
       addresses: this._fb.array([]),
       creditCards: this._fb.array([])
     });
 
-    // add address
     this.addAddress();
     this.addCreditCard();
+
     /* subscribe to addresses value changes */
     // this.myForm.controls['addresses'].valueChanges.subscribe(x => {
     //   console.log(x);
