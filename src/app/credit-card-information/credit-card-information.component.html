@@ -1,3 +1,46 @@
-<p>
-  credit-card-information works!
-</p>
+<div [formGroup]="creditCardForm">
+  <div class="row ">
+    <div class="col-md-12">
+      <input type="text"
+             formControlName="number"
+             class="form-control"
+             placeholder="Enter Card Number">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 col-sm-3 col-xs-3">
+      <small class="help-block text-muted"> Expiry Month</small>
+      <input type="text"
+             formControlName="expiryMonth"
+             class="form-control"
+             placeholder="MM">
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-3">
+      <small class="help-block text-muted"> Expiry Year</small>
+      <input type="text"
+             formControlName="expiryYear"
+             class="form-control"
+             placeholder="YY">
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-3">
+      <small class="help-block text-muted"> CCV</small>
+      <input type="text"
+             formControlName="ccv"
+             class="form-control"
+             placeholder="CCV">
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-3">
+      <img src="assets/img/1.png" class="img-rounded">
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-md-12">
+      <input type="text"
+             formControlName="ccv"
+             class="form-control"
+             placeholder="Name On The Card">
+    </div>
+  </div>
+</div>
+
+

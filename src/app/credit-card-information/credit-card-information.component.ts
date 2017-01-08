@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-credit-card-information',
@@ -6,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./credit-card-information.component.css']
 })
 export class CreditCardInformationComponent implements OnInit {
-
-  constructor() { }
+  @Input('group')
+  public creditCardForm: FormGroup;
 
   ngOnInit() {
   }

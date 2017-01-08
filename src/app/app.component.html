@@ -1,48 +1,116 @@
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">The Finer Things Club (no logo)</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right  ">
+        <li><a href="#">HOME</a></li>
+        <li><a href="#">ABOUT</a></li>
+        <li><a href="#">CONTACT</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
 <div class="container">
   <div class="row">
-    <div class="col-xs-12">
-      <div class="margin-20">
-        <h4>Edit your shipping information</h4>
-      </div>
-      <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
-        <div class="form-group">
-          <label>Name</label>
-          <input type="text" class="form-control" formControlName="name">
-          <small *ngIf="!myForm.controls.name.valid" class="text-danger">
-            Name is required (minimum 5 characters).
-          </small>
-        </div>
-        <!--addresses-->
-        <div formArrayName="addresses">
-          <div *ngFor="let address of myForm.controls.addresses.controls; let i=index" class="panel panel-default">
-            <div class="panel-heading">
-              <span>Address {{i + 1}}</span>
-              <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.addresses.controls.length > 1"
-                    (click)="removeAddress(i)"></span>
+    <div class="col-md-12 text-center">
+      <h2>Foms in Angular 2</h2>
+      <h6>Terrify codified by one "Finer"</h6>
+      <br>
+    </div>
+  </div>
+
+  <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="margin-20">
+              <h4>Edit your shipping information</h4>
             </div>
-            <div class="panel-body" [formGroupName]="i">
-              <app-address-information [group]="myForm.controls.addresses.controls[i]"></app-address-information>
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">@</span>
+              <input type="text" class="form-control" formControlName="name" placeholder="Your Name" aria-describedby="basic-addon1">
+            </div>
+            <small *ngIf="!myForm.controls.name.valid" class="text-danger">
+              Name is required (minimum 5 characters).
+            </small>
+
+            <!--addresses-->
+            <div formArrayName="addresses">
+              <div *ngFor="let address of myForm.controls.addresses.controls; let i=index" class="panel panel-default">
+                <div class="panel-heading">
+                  <span>Address {{i + 1}}</span>
+                  <span class="glyphicon glyphicon-remove pull-right"
+                        *ngIf="myForm.controls.addresses.controls.length > 1"
+                        (click)="removeAddress(i)"></span>
+                </div>
+                <div class="panel-body" [formGroupName]="i">
+                  <app-address-information
+                    [group]="myForm.controls.addresses.controls[i]"></app-address-information>
+                </div>
+              </div>
+            </div>
+
+            <div class="margin-20">
+              <a (click)="addAddress()" style="cursor: default">
+                Add another address +
+              </a>
             </div>
           </div>
         </div>
 
-        <div class="margin-20">
-          <a (click)="addAddress()" style="cursor: default">
-            Add another address +
-          </a>
+        <div class="row">
+          <div class="col-md-12">
+
+            <!--credit card-->
+            <div formArrayName="creditCards">
+              <div *ngFor="let card of myForm.controls.creditCards.controls; let i=index" class="panel panel-default">
+                <div class="panel-heading">
+                  <span>Credit Card {{i + 1}}</span>
+                  <span class="glyphicon glyphicon-remove pull-right"
+                        *ngIf="myForm.controls.creditCards.controls.length > 1"
+                        (click)="removeCreditCard(i)"></span>
+                </div>
+                <div class="panel-body" [formGroupName]="i">
+                  <app-credit-card-information
+                    [group]="myForm.controls.creditCards.controls[i]"></app-credit-card-information>
+                </div>
+              </div>
+            </div>
+
+            <div class="margin-20">
+              <a (click)="addCreditCard()" style="cursor: default">
+                Add another credit card +
+              </a>
+            </div>
+
+          </div>
         </div>
 
-        <div class="margin-20">
-          <button type="submit" class="btn btn-primary pull-right" [disabled]="!myForm.valid">Submit</button>
-        </div>
-        <div class="clearfix"></div>
+      </div>
 
+      <div class="col-md-4">
         <div class="margin-20">
-          <div>myForm details:-</div>
+          <h4>Form validation and values</h4>
           <pre>Is myForm valid?: <br>{{myForm.valid | json}}</pre>
           <pre>form value: <br>{{myForm.value | json}}</pre>
         </div>
-      </form>
+      </div>
+
     </div>
-  </div>
+    <div class="row">
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Submit</button>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </form>
 </div>

@@ -8,7 +8,7 @@ import {FormGroup} from "@angular/forms";
 })
 export class AddressInformationComponent implements OnInit {
   @Input('group')
-  public adressForm: FormGroup;
+  public addressForm: FormGroup;
 
   ngOnInit() {
   }
