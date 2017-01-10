@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <button *ngFor="let power of getPowers()"
+            type="button"
+            [attr.class]="'btn-jedi btn btn-xs btn-'+power.color"
+            (click)="addPower(power)">
+      {{power.display}}&nbsp;&nbsp;<i class="fa fa-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="row" *ngIf="currentPowers.length > 0;">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="fixed-panel">&nbsp;</div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <button *ngFor="let power of currentPowers; let i = index;"
+                type="button"
+                [attr.class]="'btn-jedi btn btn-sm btn-'+power.color"
+                (click)="removePower(power,i)">
+          {{power.display}}&nbsp;&nbsp;<i class="fa fa-minus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+<select name="powerSelect"
+        class="form-control"
+        placeholder="Select your power!!"
+        value
+        [formControl]="powersForm">
+  <option *ngFor="let power of getPowers(); let i=index;"
+          [attr.value]="power.value">
+    {{power.display}}
+  </option>
+</select>-->

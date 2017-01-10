@@ -11,8 +11,8 @@ export class AppComponent {
   public myForm: FormGroup;
 
   public sides = [
-    {value: 'L', display: 'Light Side', color:"primary"},
-    {value: 'D', display: 'Dark Side', color:"danger"}
+    {value: 'L', display: 'Light Side', color: "primary"},
+    {value: 'D', display: 'Dark Side', color: "danger"}
   ];
 
   constructor(private _fb: FormBuilder) {
@@ -25,23 +25,43 @@ export class AppComponent {
       master: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
       planet: [''],
       mail: ['', Validators.required],
+      //powers: this._fb.array([]),
+      powers: [],
       addresses: this._fb.array([]),
       creditCards: this._fb.array([])
     });
 
+    //this.addPower();
     this.addAddress();
     this.addCreditCard();
 
-    /* subscribe to addresses value changes */
-    // this.myForm.controls['addresses'].valueChanges.subscribe(x => {
-    //   console.log(x);
-    // })
+    this.myForm.controls['side'].valueChanges.subscribe(value => {
+      console.log(value);
+    });
+  }
+
+  initPowers() {
+    return this._fb.group({
+      power: ['', Validators.required]
+    });
+  }
+
+  addPower() {
+    const control = <FormArray>this.myForm.controls['powers'];
+    const powersGroup = this.initPowers();
+
+    control.push(powersGroup);
+  }
+
+  removePowers(i: number) {
+    const control = <FormArray>this.myForm.controls['powers'];
+    control.removeAt(i);
   }
 
   initAddress() {
     return this._fb.group({
       street: ['', Validators.required],
-      postcode: ['']
+      postcode: [''],
     });
   }
 

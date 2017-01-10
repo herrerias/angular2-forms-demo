@@ -105,30 +105,51 @@
             </div>
 
             <div class="margin-20">
+              <h4>Your Powers Information</h4>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <app-powers-information
+                  [group]="myForm.controls.powers"
+                  [side]="myForm.controls.side.value">
+                </app-powers-information>
+              </div>
+            </div>
+
+
+            <div class="margin-20">
               <h4>Your address information</h4>
             </div>
 
-            <!--addresses-->
-            <div formArrayName="addresses">
-              <div *ngFor="let address of myForm.controls.addresses.controls; let i=index" class="panel panel-default">
-                <div class="panel-heading">
-                  <span>Address {{i + 1}}</span>
-                  <span class="glyphicon glyphicon-remove pull-right"
-                        *ngIf="myForm.controls.addresses.controls.length > 1"
-                        (click)="removeAddress(i)"></span>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <!--addresses-->
+                <div formArrayName="addresses">
+                  <div *ngFor="let address of myForm.controls.addresses.controls; let i=index"
+                       class="panel panel-default">
+                    <div class="panel-heading">
+                      <span>Address {{i + 1}}</span>
+                      <span class="glyphicon glyphicon-remove pull-right"
+                            *ngIf="myForm.controls.addresses.controls.length > 1"
+                            (click)="removeAddress(i)"></span>
+                    </div>
+                    <div class="panel-body" [formGroupName]="i">
+                      <app-address-information
+                        [group]="myForm.controls.addresses.controls[i]"></app-address-information>
+                    </div>
+                  </div>
                 </div>
-                <div class="panel-body" [formGroupName]="i">
-                  <app-address-information
-                    [group]="myForm.controls.addresses.controls[i]"></app-address-information>
+
+                <div class="margin-20">
+                  <a (click)="addAddress()" style="cursor: default">
+                    Add another address +
+                  </a>
                 </div>
               </div>
             </div>
 
-            <div class="margin-20">
-              <a (click)="addAddress()" style="cursor: default">
-                Add another address +
-              </a>
-            </div>
           </div>
         </div>
 
@@ -172,8 +193,8 @@
 
     </div>
     <div class="row">
-      <div class="col-md-12">
-        <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Submit</button>
+      <div class="col-md-">
+        <button type="submit" class="btn btn-primary btn-block" [disabled]="!myForm.valid">Submit</button>
       </div>
       <div class="clearfix"></div>
     </div>
