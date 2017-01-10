@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {FormGroup} from "@angular/forms";
+import {FormGroup, FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-personal-information',
@@ -16,6 +16,14 @@ export class PersonalInformationComponent implements OnInit {
   personalForm: FormGroup;
 
   ngOnInit() {
+  }
+
+  isValid(control: FormControl): boolean {
+    return !control.valid && control.touched;
+  }
+
+  isRequired(control: FormControl): boolean {
+    return control.hasError("required") && control.touched;
   }
 
 }

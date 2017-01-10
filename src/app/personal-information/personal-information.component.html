@@ -18,11 +18,11 @@
     <div class="col-md-6 col-sm-6 col-xs-6">
       <div class="input-group" [formGroup]="personalForm">
         <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-        <input type="text" class="form-control" formControlName="name" placeholder="Your Name">
+        <input type="text" class="form-control" formControlName="name" placeholder="Your Name*">
       </div>
 
       <div class="fixed-panel">
-        <small *ngIf="!personalForm.controls.name.valid" class="text-danger">
+        <small *ngIf="isRequired(personalForm.controls.name)" class="text-danger">
           Tell me your name please! (minimum 5 characters)
         </small>
       </div>
@@ -31,11 +31,11 @@
     <div class="col-md-6 col-sm-6 col-xs-6">
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-fire" aria-hidden="true"></i></span>
-        <input type="text" class="form-control" formControlName="master" placeholder="Your Master Name">
+        <input type="text" class="form-control" formControlName="master" placeholder="Your Master Name*">
       </div>
 
       <div class="fixed-panel">
-        <small *ngIf="!personalForm.controls.master.valid" class="text-danger">
+        <small *ngIf="isRequired(personalForm.controls.master)" class="text-danger">
           Your master is really important too
         </small>
       </div>
@@ -51,11 +51,11 @@
     <div class="col-md-6 col-sm-6 col-xs-6">
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-        <input type="email" class="form-control" formControlName="mail" placeholder="Your Galactic Mail">
+        <input type="email" class="form-control" formControlName="mail" placeholder="Your Galactic Mail*">
       </div>
 
       <div class="fixed-panel">
-        <small *ngIf="!personalForm.controls.mail.valid" class="text-danger">
+        <small *ngIf="isRequired(personalForm.controls.mail)" class="text-danger">
           We need to sense your presence
         </small>
       </div>

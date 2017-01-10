@@ -1,5 +1,5 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {FormGroup} from "@angular/forms";
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-address-information',
@@ -9,11 +9,32 @@ import {FormGroup} from "@angular/forms";
 export class AddressInformationComponent implements OnInit {
   @Input('group')
   addressForm: FormGroup;
-
   @Input('trash')
   showTrash: boolean;
+  @Output()
+  addressChange = new EventEmitter();
+
+  constructor(private fb: FormBuilder) {
+  }
 
   ngOnInit() {
-    console.log(this.showTrash);
+  }
+
+  initAddress() {
+    return this.fb.group({
+      street: ['', Validators.required],
+      postcode: [''],
+    });
+  }
+
+  private removeAddress() {
+    console.log('event capturado');
+    this.addressChange.emit({
+      value: 'Lo que sea'
+    });
+  }
+
+  isRequired(control: FormControl): boolean {
+    return control.hasError("required") && control.touched;
   }
 }

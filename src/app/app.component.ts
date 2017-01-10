@@ -23,64 +23,30 @@ export class AppComponent {
         mail: ['', Validators.required],
       }),
       powers: [],
-      addresses: this._fb.array([]),
-      creditCards: this._fb.array([])
+      addresses: this._fb.array([])
     });
 
-    this.addAddress();
-    this.addCreditCard();
-
+    this.addAddress(null);
   }
 
   initAddress() {
     return this._fb.group({
+      id: [(<FormArray>this.myForm.controls['addresses']).length+1],
       street: ['', Validators.required],
       postcode: [''],
     });
   }
 
-  addAddress() {
+  addAddress(event) {
     const control = <FormArray>this.myForm.controls['addresses'];
     const addressGroup = this.initAddress();
-
     control.push(addressGroup);
-
-    /* subscribe to individual address value changes */
-    // addrCtrl.valueChanges.subscribe(x => {
-    //   console.log(x);
-    // })
   }
 
-  removeAddress(i: number) {
+  removeAddress(event: any, index: number) {
+    console.log(event);
     const control = <FormArray>this.myForm.controls['addresses'];
-    control.removeAt(i);
-  }
-
-  initCreditCard() {
-    return this._fb.group({
-      number: ['', Validators.required],
-      expiryMonth: ['', Validators.required],
-      expiryYear: ['', Validators.required],
-      ccv: ['', Validators.required],
-      name: ['', Validators.required]
-    });
-  }
-
-  addCreditCard() {
-    const control = <FormArray>this.myForm.controls['creditCards'];
-    const creditCardGroup = this.initCreditCard();
-
-    control.push(creditCardGroup);
-
-    /* subscribe to individual address value changes */
-    // addrCtrl.valueChanges.subscribe(x => {
-    //   console.log(x);
-    // })
-  }
-
-  removeCreditCard(i: number) {
-    const control = <FormArray>this.myForm.controls['creditCards'];
-    control.removeAt(i);
+    control.removeAt(index);
   }
 
   getPersonalInformation(){

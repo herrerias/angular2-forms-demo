@@ -69,21 +69,19 @@
                       <template ngFor let-row [ngForOf]="myForm.controls.addresses.controls" let-i="index">
                         <app-address-information
                           [group]="myForm.controls.addresses.controls[i]"
-                          [trash]="i > 0">
+                          [trash]="i > 0"
+                          (addressChange)="removeAddress($event,i);">
                         </app-address-information>
 
                         <div style="clear: both;"></div>
                       </template>
+
+                      <a (click)="addAddress()">
+                        Add another address +
+                      </a>
                     </div>
                   </div>
                 </div>
-
-                <div class="margin-20">
-                  <a (click)="addAddress()" style="cursor: default">
-                    Add another address +
-                  </a>
-                </div>
-
               </div>
             </div>
 
@@ -101,13 +99,13 @@
       </div>
 
     </div>
+
     <div class="row" style="margin-bottom: 10px;">
       <div class="col-md-8">
         <button type="submit" class="btn btn-primary btn-block" [disabled]="!myForm.valid">Submit</button>
       </div>
       <div class="clearfix"></div>
     </div>
-
 
   </form>
 </div>
