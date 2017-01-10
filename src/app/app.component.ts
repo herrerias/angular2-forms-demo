@@ -10,52 +10,26 @@ import {Customer} from "./customer.interface";
 export class AppComponent {
   public myForm: FormGroup;
 
-  public sides = [
-    {value: 'L', display: 'Light Side', color: "primary"},
-    {value: 'D', display: 'Dark Side', color: "danger"}
-  ];
-
   constructor(private _fb: FormBuilder) {
   }
 
   ngOnInit() {
     this.myForm = this._fb.group({
-      side: [this.sides[0].value],
-      name: ['', [Validators.required, Validators.minLength(5)]],
-      master: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
-      planet: [''],
-      mail: ['', Validators.required],
-      //powers: this._fb.array([]),
+      personal: this._fb.group({
+        side: ['L'],
+        name: ['', [Validators.required, Validators.minLength(5)]],
+        master: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+        planet: [''],
+        mail: ['', Validators.required],
+      }),
       powers: [],
       addresses: this._fb.array([]),
       creditCards: this._fb.array([])
     });
 
-    //this.addPower();
     this.addAddress();
     this.addCreditCard();
 
-    this.myForm.controls['side'].valueChanges.subscribe(value => {
-      console.log(value);
-    });
-  }
-
-  initPowers() {
-    return this._fb.group({
-      power: ['', Validators.required]
-    });
-  }
-
-  addPower() {
-    const control = <FormArray>this.myForm.controls['powers'];
-    const powersGroup = this.initPowers();
-
-    control.push(powersGroup);
-  }
-
-  removePowers(i: number) {
-    const control = <FormArray>this.myForm.controls['powers'];
-    control.removeAt(i);
   }
 
   initAddress() {
@@ -107,6 +81,10 @@ export class AppComponent {
   removeCreditCard(i: number) {
     const control = <FormArray>this.myForm.controls['creditCards'];
     control.removeAt(i);
+  }
+
+  getPersonalInformation(){
+    return <FormGroup>this.myForm.controls['personal'];
   }
 
   save(model: Customer) {

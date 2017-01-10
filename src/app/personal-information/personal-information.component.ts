@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-personal-information',
@@ -6,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./personal-information.component.css']
 })
 export class PersonalInformationComponent implements OnInit {
+  public sides = [
+    {value: 'L', display: 'Light Side', color: 'primary'},
+    {value: 'D', display: 'Dark Side', color: 'danger'}
+  ];
 
-  constructor() { }
+  @Input('group')
+  personalForm: FormGroup;
 
   ngOnInit() {
   }
