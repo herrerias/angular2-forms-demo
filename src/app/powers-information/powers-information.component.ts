@@ -53,7 +53,6 @@ export class PowersInformationComponent implements OnInit {
 
   ngOnInit() {
     this.initPowers();
-    console.log(this.side);
   }
 
   private initPowers(){

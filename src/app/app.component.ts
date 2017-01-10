@@ -1,6 +1,13 @@
 import {Component} from '@angular/core';
-import {FormGroup, FormBuilder, Validators, FormArray} from "@angular/forms";
-import {Customer} from "./customer.interface";
+import {FormGroup, FormBuilder, Validators, FormArray, FormControl} from "@angular/forms";
+
+function postCodeValidator(postcode: FormControl): {[s: string]: boolean} {
+  if( !postcode.value.match(/\d{5}/)){
+    return {invalidPostCode: true};
+  }else {
+    return {invalidPostCode: false};
+  }
+}
 
 @Component({
   selector: 'app-root',
@@ -8,7 +15,8 @@ import {Customer} from "./customer.interface";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public myForm: FormGroup;
+  myForm: FormGroup;
+  buttonSide: string = "primary";
 
   constructor(private _fb: FormBuilder) {
   }
@@ -26,7 +34,7 @@ export class AppComponent {
       addresses: this._fb.array([])
     });
 
-    this.addAddress(null);
+    this.addAddress();
   }
 
   initAddress() {
@@ -37,23 +45,26 @@ export class AppComponent {
     });
   }
 
-  addAddress(event) {
+  addAddress() {
     const control = <FormArray>this.myForm.controls['addresses'];
     const addressGroup = this.initAddress();
     control.push(addressGroup);
   }
 
-  removeAddress(event: any, index: number) {
-    console.log(event);
+  removeAddress(index: number) {
     const control = <FormArray>this.myForm.controls['addresses'];
     control.removeAt(index);
+  }
+
+  cambio(event: any){
+    this.buttonSide = event['value'];
   }
 
   getPersonalInformation(){
     return <FormGroup>this.myForm.controls['personal'];
   }
 
-  save(model: Customer) {
+  save(model: any) {
     // call API to save
     // ...
     console.log(model);

@@ -20,21 +20,15 @@ export class AddressInformationComponent implements OnInit {
   ngOnInit() {
   }
 
-  initAddress() {
-    return this.fb.group({
-      street: ['', Validators.required],
-      postcode: [''],
-    });
-  }
-
   private removeAddress() {
-    console.log('event capturado');
-    this.addressChange.emit({
-      value: 'Lo que sea'
-    });
+    this.addressChange.emit();
   }
 
-  isRequired(control: FormControl): boolean {
+  private isRequired(control: FormControl): boolean {
     return control.hasError("required") && control.touched;
+  }
+
+  private invalidPostCode(control: FormControl): boolean {
+    return control.hasError("invalidPostCode");
   }
 }

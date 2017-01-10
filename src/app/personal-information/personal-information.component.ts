@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {FormGroup, FormControl} from "@angular/forms";
 
 @Component({
@@ -14,16 +14,33 @@ export class PersonalInformationComponent implements OnInit {
 
   @Input('group')
   personalForm: FormGroup;
+  @Output()
+  sideChanged = new EventEmitter();
 
   ngOnInit() {
+    this.personalForm.controls['side'].valueChanges.subscribe(value => {
+      this.changeSide(value);
+    })
   }
 
-  isValid(control: FormControl): boolean {
+  private isValid(control: FormControl): boolean {
     return !control.valid && control.touched;
   }
 
-  isRequired(control: FormControl): boolean {
+  private isRequired(control: FormControl): boolean {
     return control.hasError("required") && control.touched;
+  }
+
+  private getSideColor(_side: string): any{
+      return this.sides.filter(side => {
+        return side.value === _side;
+      })[0]['color'];
+  }
+
+  private changeSide(side: any) {
+    this.sideChanged.emit({
+      value: this.getSideColor(side)
+    });
   }
 
 }

@@ -10,6 +10,12 @@
     </div>
     <div class="form-group col-xs-5">
       <input type="text" class="form-control" formControlName="postcode" placeholder="Your Postcode">
+      <div class="fixed-panel">
+        <small *ngIf="addressForm.controls.postcode.hasError('invalidPostCode') && addressForm.controls.postcode.touched" class="text-danger">
+          Galactic postcode must be 5 digits!
+        </small>
+      </div>
+
     </div>
     <div class="form-group col-xs-1">
       <i class="fa fa-trash"

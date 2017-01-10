@@ -37,7 +37,8 @@
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <app-personal-information
-                  [group]="getPersonalInformation()">
+                  [group]="myForm.controls.personal"
+                  (sideChanged)="cambio($event)">
                 </app-personal-information>
               </div>
             </div>
@@ -70,7 +71,7 @@
                         <app-address-information
                           [group]="myForm.controls.addresses.controls[i]"
                           [trash]="i > 0"
-                          (addressChange)="removeAddress($event,i);">
+                          (addressChange)="removeAddress(i)">
                         </app-address-information>
 
                         <div style="clear: both;"></div>
@@ -102,7 +103,7 @@
 
     <div class="row" style="margin-bottom: 10px;">
       <div class="col-md-8">
-        <button type="submit" class="btn btn-primary btn-block" [disabled]="!myForm.valid">Submit</button>
+        <button type="submit" [attr.class]="'btn btn-block btn-'+buttonSide" [disabled]="!myForm.valid">Submit</button>
       </div>
       <div class="clearfix"></div>
     </div>
