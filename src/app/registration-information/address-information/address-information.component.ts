@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
+import {FormGroup, FormBuilder, FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-address-information',
@@ -14,7 +14,7 @@ export class AddressInformationComponent implements OnInit {
   @Output()
   addressChange = new EventEmitter();
 
-  constructor(private fb: FormBuilder) {
+  constructor() {
   }
 
   ngOnInit() {
