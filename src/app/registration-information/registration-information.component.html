@@ -45,7 +45,7 @@
                       <app-address-information
                         [group]="myForm.controls.addresses.controls[i]"
                         [trash]="i > 0"
-                        (addressChange)="removeAddress(i)">
+                        (addressChange)="removeAddress($eventr)">
                       </app-address-information>
 
                       <div style="clear: both;"></div>

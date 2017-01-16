@@ -12,7 +12,7 @@
       <input type="text" class="form-control" formControlName="postcode" placeholder="Your Postcode">
       <div class="fixed-panel">
         <small
-          *ngIf="addressForm.controls.postcode.hasError('invalidPostCode') && addressForm.controls.postcode.touched"
+          *ngIf="!addressForm.controls.postcode.hasError('invalidPostCode')"
           class="text-danger">
           Galactic postcode must be 5 digits!
         </small>
