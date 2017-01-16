@@ -1,7 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormBuilder, Validators, FormArray, FormControl} from "@angular/forms";
+import {FormGroup, FormBuilder, Validators, FormArray} from "@angular/forms";
 import {postCodeValidator} from "../validators/postcode-validator";
 
+@Component({
+  selector: 'app-registration-information',
+  templateUrl: './registration-information.component.html',
+  styleUrls: ['./registration-information.component.css']
+})
 export class RegistrationInformationComponent implements OnInit {
   myForm: FormGroup;
   buttonSide: string = "primary";
@@ -29,8 +34,8 @@ export class RegistrationInformationComponent implements OnInit {
     return this._fb.group({
       id: [(<FormArray>this.myForm.controls['addresses']).length + 1],
       street: ['', Validators.required],
-      postcode: ['',postCodeValidator ],
-    });
+      postcode: ['']
+    }, { validator: postCodeValidator });
   }
 
   addAddress() {
