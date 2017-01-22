@@ -1,14 +1,14 @@
-# Angular2FormsDemo
+# Galactic Forms
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0.
 It is used to learn how Angular 2 works with Forms.
 
 # Features
-Reactive Form APIs
-FormGroups
-FormArrays
-FormControls
-CustomValidations
+* Reactive Form APIs
+* FormGroups
+* FormArrays
+* FormControls
+* CustomValidations
 
 ## Installation
 Run `npm install` to download libraries dependencies.
